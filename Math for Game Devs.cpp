@@ -11,6 +11,14 @@ class Point{
 		float x,y;
 };
 
+//operator overload function
+Vector operator-(Point a, Point b){
+	Vector v;
+	v.x = a.x - b.x;
+	v.y = a.y - b.y;
+	return v;
+};
+
 Point Point::addVector(Vector v){
 	Point p2;
 	p2.x = x + v.x;
@@ -19,15 +27,17 @@ Point Point::addVector(Vector v){
 };
 
 int main(int argc, char** args){
-	Point p; //(1,0)
-	p.x = 1;
-	p.y = 0;
+	Point p; //(0,-1) Pacman's position
+	p.x = 0;
+	p.y = -1;
 
-	Vector v; //(2,3)
-	v.x = 2;
-	v.y = 3;
+	Point i; //(1,1) Inky's position
+	i.x = 1;
+	i.y = 1;
 
-	Point p2 = p.addVector(v);
-	std::cout << "Result: (" << p2.x << ", " << p2.y << ")\n"; //expected output (3,3)
+	Vector v;
+	v = p - i;
+
+	std::cout << "Result: (" << v.x << ", " << v.y << ")\n"; //expected output (-1,-2)
 	return 0;
 };
