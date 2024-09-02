@@ -3,9 +3,21 @@
 
 class Vector{
 	public:
+		float x, y;
+		Vector() {}// I don't know what is this.
+		Vector(float X, float Y){ //Constructor, set in value to what is pass in the parameter.
+			x = X;
+			y = Y;
+		};
 		float Length() const;
 		float LengthSqr() const;
-		float x,y;
+
+		//Wierd I have to declare these vector overload here unlike the subtraction operator,
+		//Vector operator-(Point a, Point b){...
+		//	I think its because its a kind of operation where it happens to be a Vector against a Scalar,
+		//	and not a Vector on Vector action.
+		Vector operator*(float s) const;
+		Vector operator/(float s) const:
 };
 
 float Vector::Length() const{
