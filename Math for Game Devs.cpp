@@ -1,8 +1,16 @@
+#include <cmath>
 #include <iostream>
 
 class Vector{
 	public:
+		float Length() const;
 		float x,y;
+};
+
+float Vector::Length() const{
+	float length;
+	length = sqrt(x*x+y*y);
+	return length;
 };
 
 class Point{
@@ -38,6 +46,9 @@ int main(int argc, char** args){
 	Vector v;
 	v = p - i;
 
+	float length = v.Length();
+
 	std::cout << "Result: (" << v.x << ", " << v.y << ")\n"; //expected output (-1,-2)
+	std::cout << "Length: " << length << "\n";
 	return 0;
 };
