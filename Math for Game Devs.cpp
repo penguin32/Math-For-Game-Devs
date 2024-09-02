@@ -4,12 +4,19 @@
 class Vector{
 	public:
 		float Length() const;
+		float LengthSqr() const;
 		float x,y;
 };
 
 float Vector::Length() const{
 	float length;
 	length = sqrt(x*x+y*y);
+	return length;
+};
+
+float Vector::LengthSqr() const{ //length but squared, D^2 = x^2 + y^2 in our pythagorean class.
+	float length;
+	length = x*x+y*y;
 	return length;
 };
 
@@ -43,12 +50,20 @@ int main(int argc, char** args){
 	i.x = 1;
 	i.y = 1;
 
-	Vector v;
-	v = p - i;
+	Point c; //(2,-1)
+	c.x = 2;
+	c.y = -1;
 
-	float length = v.Length();
+	Vector cp;
+	Vector ip;
 
-	std::cout << "Result: (" << v.x << ", " << v.y << ")\n"; //expected output (-1,-2)
-	std::cout << "Length: " << length << "\n";
+	cp = p - c;
+	ip = p - i;
+
+	float length_sqr_cp = cp.LengthSqr();
+	float length_sqr_ip = ip.LengthSqr();
+
+	std::cout << "Length: " << length_sqr_cp << "\n";
+	std::cout << "Length: " << length_sqr_ip << "\n";
 	return 0;
 };
