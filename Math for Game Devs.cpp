@@ -17,7 +17,7 @@ class Vector{
 		//	I think its because its a kind of operation where it happens to be a Vector against a Scalar,
 		//	and not a Vector on Vector action.
 		Vector operator*(float s) const;
-		Vector operator/(float s) const:
+		Vector operator/(float s) const;
 };
 
 float Vector::Length() const{
@@ -38,6 +38,20 @@ class Point{
 		float x,y;
 };
 
+Vector Vector::operator*(float s) const{
+	Vector scaled;
+	scaled.x = x * s;
+	scaled.y = y * s;
+	return scaled;
+}
+
+Vector Vector::operator/(float s) const{
+	Vector scaled;
+	scaled.x = x / s;
+	scaled.y = y / s;
+	return scaled;
+}
+
 //operator overload function
 Vector operator-(Point a, Point b){
 	Vector v;
@@ -54,28 +68,13 @@ Point Point::addVector(Vector v){
 };
 
 int main(int argc, char** args){
-	Point p; //(0,-1) Pacman's position
-	p.x = 0;
-	p.y = -1;
-
-	Point i; //(1,1) Inky's position
-	i.x = 1;
-	i.y = 1;
-
-	Point c; //(2,-1)
-	c.x = 2;
-	c.y = -1;
-
-	Vector cp;
-	Vector ip;
-
-	cp = p - c;
-	ip = p - i;
-
-	float length_sqr_cp = cp.LengthSqr();
-	float length_sqr_ip = ip.LengthSqr();
-
-	std::cout << "Length: " << length_sqr_cp << "\n";
-	std::cout << "Length: " << length_sqr_ip << "\n";
+	Vector v(3,4);
+	std::cout << "Pac-man's initial speed: " << v.Length() << "\n";
+	Vector doubled;
+	doubled = v*2;
+	std::cout << "Pac-man's doubled speed: " << doubled.Length() << "\n";
+	Vector halved;
+	halved = v/2;
+	std::cout << "Pac-man's halved speed: " << halved.Length() << "\n";
 	return 0;
 };
