@@ -18,6 +18,14 @@ class Vector{
 		//	and not a Vector on Vector action.
 		Vector operator*(float s) const;
 		Vector operator/(float s) const;
+
+		Vector Normalized() const;
+};
+
+Vector Vector::Normalized() const{
+	Vector normalized;
+	normalized = (*this)/Length();
+	return normalized;
 };
 
 float Vector::Length() const{
@@ -34,6 +42,11 @@ float Vector::LengthSqr() const{ //length but squared, D^2 = x^2 + y^2 in our py
 
 class Point{
 	public:
+		Point () {}
+		Point(float X, float Y){
+			x = X;
+			y = Y;
+		}
 		Point addVector(Vector v);
 		float x,y;
 };
@@ -43,14 +56,14 @@ Vector Vector::operator*(float s) const{
 	scaled.x = x * s;
 	scaled.y = y * s;
 	return scaled;
-}
+};
 
 Vector Vector::operator/(float s) const{
 	Vector scaled;
 	scaled.x = x / s;
 	scaled.y = y / s;
 	return scaled;
-}
+};
 
 //operator overload function
 Vector operator-(Point a, Point b){
@@ -68,13 +81,11 @@ Point Point::addVector(Vector v){
 };
 
 int main(int argc, char** args){
-	Vector v(3,4);
-	std::cout << "Pac-man's initial speed: " << v.Length() << "\n";
-	Vector doubled;
-	doubled = v*2;
-	std::cout << "Pac-man's doubled speed: " << doubled.Length() << "\n";
-	Vector halved;
-	halved = v/2;
-	std::cout << "Pac-man's halved speed: " << halved.Length() << "\n";
+	Point i(3,4);
+	Point p(1,2);
+	Vector pi = i-p;
+	Vector normalized = pi.Normalized();
+	std::cout << "Pac-man's view vector: (" << normalized.x << ", " << normalized.y << ")\n";
+	std::cout << "Pac-man's view vector length: " << normalized.Length() << "\n";
 	return 0;
 };
