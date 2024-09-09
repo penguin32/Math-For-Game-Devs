@@ -12,6 +12,14 @@ class Vector{
 		float Length() const;
 		float LengthSqr() const;
 
+					//this ampersand & over hear means "pass by reference"
+					//instead of making a copy of that vector, when function runs
+					//it will actually use the vector thats passed into it.
+		Vector operator+(const Vector& v) const;
+		Vector operator-(const Vector& v) const;
+					//const here means, not to change the reference that is passed in.
+					//dont have to make a copy of the vector when you pass them
+
 		//Wierd I have to declare these vector overload here unlike the subtraction operator,
 		//Vector operator-(Point a, Point b){...
 		//	I think its because its a kind of operation where it happens to be a Vector against a Scalar,
@@ -22,6 +30,16 @@ class Vector{
 		Vector Normalized() const;
 };
 
+Vector Vector::operator+(const Vector& v) const{
+	Vector r;
+	r.x = x + v.x;
+	r.y = y + v.y;
+	return r;
+}
+
+Vector Vector::operator-(const Vector& v) const{
+	return Vector(x-v.x,y-v.y);
+}
 Vector Vector::Normalized() const{
 	Vector normalized;
 	normalized = (*this)/Length();
@@ -81,11 +99,9 @@ Point Point::addVector(Vector v){
 };
 
 int main(int argc, char** args){
-	Point i(3,4);
-	Point p(1,2);
-	Vector pi = i-p;
-	Vector normalized = pi.Normalized();
-	std::cout << "Pac-man's view vector: (" << normalized.x << ", " << normalized.y << ")\n";
-	std::cout << "Pac-man's view vector length: " << normalized.Length() << "\n";
+	Vector r(4,0); //right vector
+	Vector d(0,-5);//down vector
+	Vector v = r + d;
+	std::cout << "Pac-man's new velocity: (" << v.x << ", " << v.y << ")" << std::endl;
 	return 0;
 };
